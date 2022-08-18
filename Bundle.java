@@ -45,21 +45,24 @@ public class Bundle {
                 return minId; 
             }
 
-            // if the question was shown recently (if in the 2nd half of bundleResponses array), increase its map value by 1 and continue 
+            // if the question was shown recently (if in the 2nd half of bundleResponses array), increase its map value by 1 and go back to start of while-loop
+            boolean shownRecently = false; 
             for (int i = Math.round(bundleResponses.length / 2); i < bundleResponses.length; i++) {
                 if (bundleResponses[i].questionId.equals(minId)) { 
                     allMarks.put(minId, allMarks.get(minId) + 1); 
-                    continue; 
+                    shownRecently = true; 
+                    break; 
                 }
             }
 
             // all else, return this id 
-            return minId; 
+            if (!shownRecently) { 
+                return minId; 
+            }
         }
 
 }
 
     public static void main(String[] args) { 
-
     }
 }
